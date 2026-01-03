@@ -39,6 +39,30 @@ class SeoManager
      */
     private array $pageData = [];
 
+    // ===== Advanced Meta Properties =====
+    private string $customTitle = '';
+    private string $customDescription = '';
+    private string $canonicalUrl = '';
+    private string $nextUrl = '';
+    private string $prevUrl = '';
+    private bool $robotsIndex = true;
+    private bool $robotsFollow = true;
+
+    /**
+     * @var array<string, string>
+     */
+    private array $openGraphTags = [];
+
+    /**
+     * @var array<string, string>
+     */
+    private array $twitterTags = [];
+
+    /**
+     * @var array<int, Schema\BaseBuilder>
+     */
+    private array $schemas = [];
+
     public function __construct(
         ?SeoConfig $config = null,
         ?CacheInterface $cacheImplementation = null,
@@ -323,5 +347,242 @@ class SeoManager
     public function getCache(): ?SeoCache
     {
         return $this->cache;
+    }
+
+    // ===== Advanced Meta Controls =====
+
+    /**
+     * Set the page title directly.
+     *
+     * @param string $title
+     * @return self
+     */
+    public function title(string $title): self
+    {
+        $this->customTitle = $title;
+
+        return $this;
+    }
+
+    /**
+     * Set the page description directly.
+     *
+     * @param string $description
+     * @return self
+     */
+    public function description(string $description): self
+    {
+        $this->customDescription = $description;
+
+        return $this;
+    }
+
+    /**
+     * Set the canonical URL.
+     *
+     * @param string $url
+     * @return self
+     */
+    public function canonical(string $url): self
+    {
+        $this->canonicalUrl = $url;
+
+        return $this;
+    }
+
+    /**
+     * Set the next page URL (for pagination).
+     *
+     * @param string $url
+     * @return self
+     */
+    public function next(string $url): self
+    {
+        $this->nextUrl = $url;
+
+        return $this;
+    }
+
+    /**
+     * Set the previous page URL (for pagination).
+     *
+     * @param string $url
+     * @return self
+     */
+    public function prev(string $url): self
+    {
+        $this->prevUrl = $url;
+
+        return $this;
+    }
+
+    /**
+     * Set robots meta tag.
+     *
+     * @param bool $index Allow indexing
+     * @param bool $follow Allow following links
+     * @return self
+     */
+    public function robots(bool $index = true, bool $follow = true): self
+    {
+        $this->robotsIndex = $index;
+        $this->robotsFollow = $follow;
+
+        return $this;
+    }
+
+    /**
+     * Set Open Graph meta tag.
+     *
+     * @param string $property Property name (without og: prefix)
+     * @param string $content Content value
+     * @return self
+     */
+    public function openGraph(string $property, string $content): self
+    {
+        $this->openGraphTags[$property] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Set Twitter Card meta tag.
+     *
+     * @param string $property Property name (without twitter: prefix)
+     * @param string $content Content value
+     * @return self
+     */
+    public function twitter(string $property, string $content): self
+    {
+        $this->twitterTags[$property] = $content;
+
+        return $this;
+    }
+
+    /**
+     * Add a Schema.org structured data builder.
+     *
+     * @param Schema\BaseBuilder $schema
+     * @return self
+     */
+    public function addSchema(Schema\BaseBuilder $schema): self
+    {
+        $this->schemas[] = $schema;
+
+        return $this;
+    }
+
+    /**
+     * Set page image (for OG and Twitter).
+     *
+     * @param string $url Image URL
+     * @return self
+     */
+    public function image(string $url): self
+    {
+        $this->openGraphTags['image'] = $url;
+        $this->twitterTags['image'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Render all SEO tags for the <head> section.
+     *
+     * Usage in Twig: {{ seo().render()|raw }}
+     *
+     * @return string Complete HTML for <head>
+     */
+    public function render(): string
+    {
+        $html = "\n<!-- Intent SEO -->\n";
+
+        // Title
+        $title = $this->customTitle !== '' ? $this->customTitle : $this->generateTitle();
+        if ($title !== '') {
+            $html .= '<title>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . "</title>\n";
+        }
+
+        // Description
+        $desc = $this->customDescription !== '' ? $this->customDescription : $this->generateDescription();
+        if ($desc !== '') {
+            $html .= '<meta name="description" content="' . htmlspecialchars($desc, ENT_QUOTES, 'UTF-8') . "\">\n";
+        }
+
+        // Canonical
+        if ($this->canonicalUrl !== '') {
+            $html .= '<link rel="canonical" href="' . htmlspecialchars($this->canonicalUrl, ENT_QUOTES, 'UTF-8') . "\">\n";
+        }
+
+        // Pagination links
+        if ($this->prevUrl !== '') {
+            $html .= '<link rel="prev" href="' . htmlspecialchars($this->prevUrl, ENT_QUOTES, 'UTF-8') . "\">\n";
+        }
+        if ($this->nextUrl !== '') {
+            $html .= '<link rel="next" href="' . htmlspecialchars($this->nextUrl, ENT_QUOTES, 'UTF-8') . "\">\n";
+        }
+
+        // Robots
+        $robotsValue = ($this->robotsIndex ? 'index' : 'noindex') . ', ' . ($this->robotsFollow ? 'follow' : 'nofollow');
+        $html .= '<meta name="robots" content="' . $robotsValue . "\">\n";
+
+        // Open Graph tags
+        if (!isset($this->openGraphTags['title']) && $title !== '') {
+            $this->openGraphTags['title'] = $title;
+        }
+        if (!isset($this->openGraphTags['description']) && $desc !== '') {
+            $this->openGraphTags['description'] = $desc;
+        }
+        foreach ($this->openGraphTags as $property => $content) {
+            $html .= '<meta property="og:' . htmlspecialchars($property, ENT_QUOTES, 'UTF-8') 
+                . '" content="' . htmlspecialchars($content, ENT_QUOTES, 'UTF-8') . "\">\n";
+        }
+
+        // Twitter tags
+        if (!isset($this->twitterTags['card'])) {
+            $this->twitterTags['card'] = 'summary_large_image';
+        }
+        if (!isset($this->twitterTags['title']) && $title !== '') {
+            $this->twitterTags['title'] = $title;
+        }
+        if (!isset($this->twitterTags['description']) && $desc !== '') {
+            $this->twitterTags['description'] = $desc;
+        }
+        foreach ($this->twitterTags as $property => $content) {
+            $html .= '<meta name="twitter:' . htmlspecialchars($property, ENT_QUOTES, 'UTF-8') 
+                . '" content="' . htmlspecialchars($content, ENT_QUOTES, 'UTF-8') . "\">\n";
+        }
+
+        // Schema.org structured data
+        foreach ($this->schemas as $schema) {
+            $html .= $schema->toHtml() . "\n";
+        }
+
+        // Legacy structured data
+        $html .= $this->renderStructuredData();
+
+        $html .= "<!-- /Intent SEO -->\n";
+
+        return $html;
+    }
+
+    /**
+     * Get the custom title.
+     *
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->customTitle !== '' ? $this->customTitle : $this->generateTitle();
+    }
+
+    /**
+     * Get the custom description.
+     *
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->customDescription !== '' ? $this->customDescription : $this->generateDescription();
     }
 }
