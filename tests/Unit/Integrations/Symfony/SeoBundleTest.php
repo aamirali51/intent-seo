@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Integrations\Symfony;
 
 use PHPUnit\Framework\TestCase;
-use Rumenx\PhpSeo\Integrations\Symfony\SeoBundle;
+use Intent\Seo\Integrations\Symfony\SeoBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -68,7 +68,7 @@ class SeoBundleTest extends TestCase
         $reflection = new \ReflectionClass($this->bundle);
         $namespace = $reflection->getNamespaceName();
 
-        $this->assertEquals('Rumenx\PhpSeo\Integrations\Symfony', $namespace);
+        $this->assertEquals('Intent\Seo\Integrations\Symfony', $namespace);
     }
 
     public function test_bundle_class_is_declared_strict_types(): void

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Cache;
+namespace Intent\Seo\Cache;
 
 /**
  * Cache key generator for creating consistent cache keys.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Generators\StructuredDataGenerator;
-use Rumenx\PhpSeo\Schema\ArticleSchema;
-use Rumenx\PhpSeo\Schema\WebPageSchema;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Generators\StructuredDataGenerator;
+use Intent\Seo\Schema\ArticleSchema;
+use Intent\Seo\Schema\WebPageSchema;
 
 beforeEach(function () {
     $this->config = new SeoConfig();

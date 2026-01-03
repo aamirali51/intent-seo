@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Analyzers\ImageAnalyzer;
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\Analyzers\ImageAnalyzer;
+use Intent\Seo\Config\SeoConfig;
 
 describe('ImageAnalyzer', function () {
     beforeEach(function () {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Exceptions;
+namespace Intent\Seo\Exceptions;
 
 /**
  * Exception thrown when a provider encounters an error.

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Psr\SimpleCache\CacheInterface;
-use Rumenx\PhpSeo\Cache\SeoCache;
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\Cache\SeoCache;
+use Intent\Seo\Config\SeoConfig;
 
 beforeEach(function () {
     $this->cacheImplementation = Mockery::mock(CacheInterface::class);
@@ -177,7 +177,7 @@ test('it can invalidate content cache', function () {
 test('it provides key generator', function () {
     $keyGenerator = $this->cache->keyGenerator();
 
-    expect($keyGenerator)->toBeInstanceOf(\Rumenx\PhpSeo\Cache\CacheKeyGenerator::class);
+    expect($keyGenerator)->toBeInstanceOf(\Intent\Seo\Cache\CacheKeyGenerator::class);
 });
 
 test('it can invalidate all cache', function () {

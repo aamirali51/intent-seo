@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\SeoManager;
 
 test('SeoManager can be instantiated with default configuration', function () {
     $seoManager = new SeoManager();

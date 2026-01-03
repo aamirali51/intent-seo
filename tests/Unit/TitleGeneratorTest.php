@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Generators\TitleGenerator;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Generators\TitleGenerator;
 
 test('TitleGenerator can generate title from content', function () {
     $config = new SeoConfig();

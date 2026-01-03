@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\Config\SeoConfig;
 
 test('SeoConfig can be instantiated with default settings', function () {
     $config = new SeoConfig();

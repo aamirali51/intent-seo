@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\RateLimiting;
+namespace Intent\Seo\RateLimiting;
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Exceptions\ProviderException;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Exceptions\ProviderException;
 
 /**
  * Rate limiter for AI provider requests.

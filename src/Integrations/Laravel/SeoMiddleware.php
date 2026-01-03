@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Integrations\Laravel;
+namespace Intent\Seo\Integrations\Laravel;
 
 use Closure;
 use Illuminate\Http\Request;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\SeoManager;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

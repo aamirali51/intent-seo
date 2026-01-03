@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Providers\AnthropicProvider;
-use Rumenx\PhpSeo\Providers\GoogleProvider;
-use Rumenx\PhpSeo\Providers\OllamaProvider;
-use Rumenx\PhpSeo\Providers\OpenAiProvider;
-use Rumenx\PhpSeo\Providers\ProviderFactory;
-use Rumenx\PhpSeo\Providers\XaiProvider;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Providers\AnthropicProvider;
+use Intent\Seo\Providers\GoogleProvider;
+use Intent\Seo\Providers\OllamaProvider;
+use Intent\Seo\Providers\OpenAiProvider;
+use Intent\Seo\Providers\ProviderFactory;
+use Intent\Seo\Providers\XaiProvider;
 
 test('ProviderFactory can create OpenAI provider', function () {
     $config = new SeoConfig([

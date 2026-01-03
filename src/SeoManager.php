@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo;
+namespace Intent\Seo;
 
 use Psr\SimpleCache\CacheInterface;
-use Rumenx\PhpSeo\Analyzers\ContentAnalyzer;
-use Rumenx\PhpSeo\Analyzers\ImageAnalyzer;
-use Rumenx\PhpSeo\Cache\SeoCache;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Generators\DescriptionGenerator;
-use Rumenx\PhpSeo\Generators\ImageAltGenerator;
-use Rumenx\PhpSeo\Generators\MetaTagGenerator;
-use Rumenx\PhpSeo\Generators\StructuredDataGenerator;
-use Rumenx\PhpSeo\Generators\TitleGenerator;
+use Intent\Seo\Analyzers\ContentAnalyzer;
+use Intent\Seo\Analyzers\ImageAnalyzer;
+use Intent\Seo\Cache\SeoCache;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Generators\DescriptionGenerator;
+use Intent\Seo\Generators\ImageAltGenerator;
+use Intent\Seo\Generators\MetaTagGenerator;
+use Intent\Seo\Generators\StructuredDataGenerator;
+use Intent\Seo\Generators\TitleGenerator;
 
 /**
  * Main SEO Manager class that orchestrates SEO optimization tasks.

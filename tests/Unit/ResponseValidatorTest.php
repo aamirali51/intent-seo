@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\AI\ResponseValidator;
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\AI\ResponseValidator;
+use Intent\Seo\Config\SeoConfig;
 
 test('ResponseValidator can be instantiated with config', function () {
     $config = new SeoConfig();

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Analyzers\ContentAnalyzer;
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\Analyzers\ContentAnalyzer;
+use Intent\Seo\Config\SeoConfig;
 
 test('ContentAnalyzer can analyze basic content', function () {
     $config = new SeoConfig();

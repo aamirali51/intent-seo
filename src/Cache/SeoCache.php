@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Cache;
+namespace Intent\Seo\Cache;
 
 use Psr\SimpleCache\CacheInterface;
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\Config\SeoConfig;
 
 /**
  * SEO cache wrapper for managing cached SEO data.

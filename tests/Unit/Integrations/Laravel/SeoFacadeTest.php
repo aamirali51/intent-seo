@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use Orchestra\Testbench\TestCase;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Integrations\Laravel\SeoFacade;
-use Rumenx\PhpSeo\Integrations\Laravel\SeoServiceProvider;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Integrations\Laravel\SeoFacade;
+use Intent\Seo\Integrations\Laravel\SeoServiceProvider;
+use Intent\Seo\SeoManager;
 
 class SeoFacadeTest extends TestCase
 {

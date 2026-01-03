@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Providers\OpenAiProvider;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Providers\OpenAiProvider;
 
 // Mock curl functions for testing
 if (!function_exists('curl_init_mock')) {

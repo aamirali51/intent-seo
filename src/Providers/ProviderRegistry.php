@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Providers;
+namespace Intent\Seo\Providers;
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Contracts\ProviderInterface;
-use Rumenx\PhpSeo\Exceptions\ProviderException;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Contracts\ProviderInterface;
+use Intent\Seo\Exceptions\ProviderException;
 
 /**
  * Registry for managing multiple AI providers with fallback support.

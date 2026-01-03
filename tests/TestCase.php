@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Rumenx\PhpSeo\Integrations\Laravel\SeoServiceProvider;
+use Intent\Seo\Integrations\Laravel\SeoServiceProvider;
 
 abstract class TestCase extends Orchestra
 {

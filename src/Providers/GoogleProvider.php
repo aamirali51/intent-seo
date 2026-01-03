@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Providers;
+namespace Intent\Seo\Providers;
 
-use Rumenx\PhpSeo\Exceptions\ProviderException;
+use Intent\Seo\Exceptions\ProviderException;
 
 /**
  * Google (Gemini) provider for AI-powered SEO generation.

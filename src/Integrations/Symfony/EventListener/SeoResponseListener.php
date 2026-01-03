@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Integrations\Symfony\EventListener;
+namespace Intent\Seo\Integrations\Symfony\EventListener;
 
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\SeoManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 

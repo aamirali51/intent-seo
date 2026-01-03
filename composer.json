@@ -1,16 +1,14 @@
 {
-    "name": "rumenx/php-seo",
-    "description": "AI-powered, framework-agnostic PHP package for automated SEO optimization. Intelligently generates meta tags, titles, descriptions, and alt texts using configurable AI providers or manual patterns.",
+    "name": "aamirali/intent-seo",
+    "description": "AI-powered SEO optimization package for Intent Framework. Forked from rumenx/php-seo and modified exclusively for Intent Framework integration.",
     "keywords": [
         "seo",
         "meta-tags",
-        "laravel",
-        "symfony",
+        "intent-framework",
         "ai-powered",
         "automation",
         "optimization",
         "php",
-        "framework-agnostic",
         "openai",
         "claude",
         "ollama"
@@ -19,24 +17,23 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Aamir Ali",
+            "email": "aamirabdullah33@gmail.com",
+            "homepage": "https://github.com/aamirali51",
+            "role": "Developer"
+        },
+        {
             "name": "Rumen Damyanov",
             "email": "contact@rumenx.com",
             "homepage": "https://github.com/RumenDamyanov",
-            "role": "Developer"
+            "role": "Original Author"
         }
     ],
-    "homepage": "https://github.com/RumenDamyanov/php-seo",
+    "homepage": "https://github.com/aamirali51/intent-seo",
     "support": {
-        "issues": "https://github.com/RumenDamyanov/php-seo/issues",
-        "source": "https://github.com/RumenDamyanov/php-seo",
-        "docs": "https://github.com/RumenDamyanov/php-seo/wiki"
+        "issues": "https://github.com/aamirali51/intent-seo/issues",
+        "source": "https://github.com/aamirali51/intent-seo"
     },
-    "funding": [
-        {
-            "type": "github",
-            "url": "https://github.com/sponsors/RumenDamyanov"
-        }
-    ],
     "require": {
         "php": "^8.2",
         "ext-curl": "*",
@@ -49,33 +46,21 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.48",
-        "laravel/framework": "^11.0",
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^9.0",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-type-coverage": "^2.8",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-strict-rules": "^1.5",
-        "squizlabs/php_codesniffer": "^3.8 || ^4.0",
-        "symfony/dependency-injection": "^7.3",
-        "symfony/framework-bundle": "^7.0",
-        "symfony/http-kernel": "^7.3",
-        "symfony/var-dumper": "^7.0",
-        "twig/twig": "^3.21"
-    },
-    "suggest": {
-        "laravel/framework": "For Laravel integration (^10.0|^11.0)",
-        "symfony/framework-bundle": "For Symfony integration (^6.0|^7.0)",
-        "monolog/monolog": "For enhanced logging support"
+        "squizlabs/php_codesniffer": "^3.8 || ^4.0"
     },
     "autoload": {
         "psr-4": {
-            "Rumenx\\PhpSeo\\": "src/"
+            "Intent\\Seo\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rumenx\\PhpSeo\\Tests\\": "tests/"
+            "Intent\\Seo\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -89,20 +74,7 @@
             "@style",
             "@analyze",
             "@test"
-        ],
-        "post-autoload-dump": [
-            "@php ./vendor/bin/testbench package:discover --ansi"
         ]
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Rumenx\\PhpSeo\\Integrations\\Laravel\\SeoServiceProvider"
-            ],
-            "aliases": {
-                "Seo": "Rumenx\\PhpSeo\\Integrations\\Laravel\\SeoFacade"
-            }
-        }
     },
     "config": {
         "sort-packages": true,

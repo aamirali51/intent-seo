@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Integrations\Laravel;
+namespace Intent\Seo\Integrations\Laravel;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\SeoManager;
 
 /**
  * Laravel service provider for the PHP SEO package.

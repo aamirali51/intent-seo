@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Analyzers;
+namespace Intent\Seo\Analyzers;
 
-use Rumenx\PhpSeo\Cache\SeoCache;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Contracts\AnalyzerInterface;
+use Intent\Seo\Cache\SeoCache;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Contracts\AnalyzerInterface;
 
 /**
  * Content analyzer for extracting SEO-relevant information from page content.

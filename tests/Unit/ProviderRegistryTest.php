@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Exceptions\ProviderException;
-use Rumenx\PhpSeo\Providers\AnthropicProvider;
-use Rumenx\PhpSeo\Providers\OpenAiProvider;
-use Rumenx\PhpSeo\Providers\ProviderFactory;
-use Rumenx\PhpSeo\Providers\ProviderRegistry;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Exceptions\ProviderException;
+use Intent\Seo\Providers\AnthropicProvider;
+use Intent\Seo\Providers\OpenAiProvider;
+use Intent\Seo\Providers\ProviderFactory;
+use Intent\Seo\Providers\ProviderRegistry;
 
 test('ProviderRegistry can be instantiated', function () {
     $config = new SeoConfig(['ai' => ['api_key' => 'test-key']]);

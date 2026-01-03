@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Schema;
+namespace Intent\Seo\Schema;
 
 /**
  * Schema.org WebPage structured data.

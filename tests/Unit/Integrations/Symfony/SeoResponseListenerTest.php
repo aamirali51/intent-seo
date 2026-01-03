@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Integrations\Symfony;
 
 use PHPUnit\Framework\TestCase;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Integrations\Symfony\EventListener\SeoResponseListener;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Integrations\Symfony\EventListener\SeoResponseListener;
+use Intent\Seo\SeoManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;

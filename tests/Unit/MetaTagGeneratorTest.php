@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Generators\MetaTagGenerator;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Generators\MetaTagGenerator;
 
 test('MetaTagGenerator can be instantiated', function () {
     $config = new SeoConfig();

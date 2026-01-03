@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\RateLimiting;
+namespace Intent\Seo\RateLimiting;
 
 /**
  * Token Bucket implementation for rate limiting.

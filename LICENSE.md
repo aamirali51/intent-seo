@@ -1,6 +1,10 @@
 MIT License
 
-Copyright (c) 2025 Rumen Damyanov
+Original Work Copyright (c) 2025 Rumen Damyanov
+Fork Modifications Copyright (c) 2026 Aamir Ali
+
+This is a fork of rumenx/php-seo (https://github.com/RumenDamyanov/php-seo)
+modified for Intent Framework.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

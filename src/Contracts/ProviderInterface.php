@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Contracts;
+namespace Intent\Seo\Contracts;
 
 /**
  * Interface for AI providers.
@@ -18,7 +18,7 @@ interface ProviderInterface
      * @param string $prompt The prompt to send to the AI
      * @param array<string, mixed> $options Additional options for the request
      * @return string The generated content
-     * @throws \Rumenx\PhpSeo\Exceptions\ProviderException
+     * @throws \Intent\Seo\Exceptions\ProviderException
      */
     public function generate(string $prompt, array $options = []): string;
 
@@ -28,7 +28,7 @@ interface ProviderInterface
      * @param array<string, mixed> $analysis Content analysis data
      * @param array<string, mixed> $options Generation options
      * @return string The generated title
-     * @throws \Rumenx\PhpSeo\Exceptions\ProviderException
+     * @throws \Intent\Seo\Exceptions\ProviderException
      */
     public function generateTitle(array $analysis, array $options = []): string;
 
@@ -38,7 +38,7 @@ interface ProviderInterface
      * @param array<string, mixed> $analysis Content analysis data
      * @param array<string, mixed> $options Generation options
      * @return string The generated description
-     * @throws \Rumenx\PhpSeo\Exceptions\ProviderException
+     * @throws \Intent\Seo\Exceptions\ProviderException
      */
     public function generateDescription(array $analysis, array $options = []): string;
 
@@ -48,7 +48,7 @@ interface ProviderInterface
      * @param array<string, mixed> $analysis Content analysis data
      * @param array<string, mixed> $options Generation options
      * @return array<string> The generated keywords
-     * @throws \Rumenx\PhpSeo\Exceptions\ProviderException
+     * @throws \Intent\Seo\Exceptions\ProviderException
      */
     public function generateKeywords(array $analysis, array $options = []): array;
 

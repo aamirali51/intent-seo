@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Generators;
+namespace Intent\Seo\Generators;
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Contracts\GeneratorInterface;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Contracts\GeneratorInterface;
 
 /**
  * Meta tag generator for creating comprehensive SEO meta tags.

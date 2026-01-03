@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Exceptions\ProviderException;
-use Rumenx\PhpSeo\RateLimiting\RateLimiter;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Exceptions\ProviderException;
+use Intent\Seo\RateLimiting\RateLimiter;
 
 test('it can acquire tokens', function () {
     $config = new SeoConfig([

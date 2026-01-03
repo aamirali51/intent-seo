@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Providers\GoogleProvider;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Providers\GoogleProvider;
 
 test('GoogleProvider can be instantiated with config', function () {
     $config = new SeoConfig([

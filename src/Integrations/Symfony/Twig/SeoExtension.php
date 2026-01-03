@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Integrations\Symfony\Twig;
+namespace Intent\Seo\Integrations\Symfony\Twig;
 
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\SeoManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

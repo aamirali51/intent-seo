@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Providers\AnthropicProvider;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Providers\AnthropicProvider;
 
 test('AnthropicProvider can be instantiated with config', function () {
     $config = new SeoConfig([

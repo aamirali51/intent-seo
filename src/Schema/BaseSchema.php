@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Schema;
+namespace Intent\Seo\Schema;
 
 /**
  * Base class for Schema.org structured data types.

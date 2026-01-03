@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\RateLimiting\TokenBucket;
+use Intent\Seo\RateLimiting\TokenBucket;
 
 test('it can consume tokens', function () {
     $bucket = new TokenBucket(10, 1);

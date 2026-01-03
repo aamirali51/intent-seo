@@ -1,5 +1,13 @@
 # Support php-seo Development
 
+> [!IMPORTANT]
+> **This is a fork of [rumenx/php-seo](https://github.com/RumenDamyanov/php-seo) modified for Intent Framework.**
+> 
+> The original author, **Rumen Damyanov**, created this amazing package and deserves your support!
+> Please consider sponsoring his continued development of the original package.
+
+---
+
 Thank you for considering supporting the development of php-seo! Your support helps maintain and improve this open-source project.
 
 ## Ways to Support

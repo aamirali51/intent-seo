@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Cache\CacheKeyGenerator;
+use Intent\Seo\Cache\CacheKeyGenerator;
 
 beforeEach(function () {
     $this->generator = new CacheKeyGenerator();

@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Route;
 use Orchestra\Testbench\TestCase;
-use Rumenx\PhpSeo\Integrations\Laravel\SeoMiddleware;
-use Rumenx\PhpSeo\Integrations\Laravel\SeoServiceProvider;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\Integrations\Laravel\SeoMiddleware;
+use Intent\Seo\Integrations\Laravel\SeoServiceProvider;
+use Intent\Seo\SeoManager;
 
 class SeoMiddlewareTest extends TestCase
 {

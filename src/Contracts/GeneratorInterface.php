@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Contracts;
+namespace Intent\Seo\Contracts;
 
 /**
  * Interface for SEO content generators.

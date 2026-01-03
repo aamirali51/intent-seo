@@ -1,22 +1,12 @@
-# Contributing to php-seo
+# Contributing to Intent SEO
 
-Thank you for considering contributing to php-seo! We welcome contributions from the community and are excited to work with you.
+> **Note**: This is a fork of [rumenx/php-seo](https://github.com/RumenDamyanov/php-seo) modified for Intent Framework.
 
-## Table of Contents
-
-- [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
-- [Development Setup](#development-setup)
-- [Making Changes](#making-changes)
-- [Testing](#testing)
-- [Code Style](#code-style)
-- [Pull Request Process](#pull-request-process)
-- [Reporting Issues](#reporting-issues)
-- [Feature Requests](#feature-requests)
+Thank you for considering contributing to Intent SEO! We welcome contributions from the community.
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+This project follows the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## Getting Started
 
@@ -40,14 +30,11 @@ This project and everyone participating in it is governed by our [Code of Conduc
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/php-seo.git
-cd php-seo
+git clone https://github.com/YOUR_USERNAME/intent-seo.git
+cd intent-seo
 
 # Install dependencies
 composer install
-
-# Copy environment configuration (if needed)
-cp .env.example .env
 ```
 
 ### Development Tools
@@ -56,16 +43,10 @@ cp .env.example .env
 # Run tests
 composer test
 
-# Run tests with coverage
-composer test-coverage
-
-# Generate HTML coverage report
-composer test-coverage-html
-
 # Check code style
 composer style
 
-# Fix code style automatically
+# Fix code style
 composer style-fix
 
 # Run static analysis
@@ -79,12 +60,9 @@ composer quality
 
 ### Branch Naming
 
-Use descriptive branch names:
-
-- `feature/ai-provider-anthropic` - for new features
-- `fix/meta-tag-escaping` - for bug fixes
-- `docs/api-reference` - for documentation updates
-- `refactor/analyzer-architecture` - for code refactoring
+- `feature/description` - for new features
+- `fix/description` - for bug fixes
+- `docs/description` - for documentation updates
 
 ### Commit Messages
 
@@ -92,256 +70,44 @@ Follow conventional commit format:
 
 ```
 type(scope): description
-
-[optional body]
-
-[optional footer]
 ```
 
-Types:
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, etc.)
-- `refactor`: Code refactoring
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks
-
-Examples:
-```
-feat(ai): add Anthropic Claude provider support
-
-Add support for Anthropic's Claude models via their API.
-Includes rate limiting, error handling, and fallback support.
-
-Closes #123
-```
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
 ## Testing
 
-### Test Requirements
+All contributions must:
 
-**This project maintains a 100% test pass rate** with 405 passing tests and 1037 assertions. All contributions must:
-
-- ✅ Write tests for all new functionality
-- ✅ Ensure all existing tests continue to pass
-- ✅ Maintain or improve test coverage
+- ✅ Write tests for new functionality
+- ✅ Ensure all existing tests pass
 - ✅ Use descriptive test names
-- ✅ Test both success and failure scenarios
-- ✅ Include edge cases and error conditions
-
-### Writing Tests
-
-All tests must pass before a PR can be merged. The project uses Pest testing framework.
-
-### Test Structure
-
-```php
-<?php
-
-test('it generates SEO title from page content', function () {
-    $seoManager = new SeoManager();
-    $content = '<h1>Welcome to Our Site</h1><p>Great content here.</p>';
-    
-    $seoManager->analyze($content);
-    $title = $seoManager->generateTitle();
-    
-    expect($title)->toBeString()
-        ->and($title)->not->toBeEmpty()
-        ->and(strlen($title))->toBeLessThanOrEqual(60);
-});
-```
-
-### Running Tests
-
-```bash
-# Run all tests (must be 405 passing before PR submission)
-composer test
-
-# Run specific test file
-./vendor/bin/pest tests/Unit/SeoManagerTest.php
-
-# Run tests with coverage
-composer test-coverage
-
-# Run tests for a specific provider
-./vendor/bin/pest --filter="OllamaProvider"
-
-# Run tests with verbose output
-./vendor/bin/pest --verbose
-
-# Run quality checks (includes tests, style, and analysis)
-composer quality
-```
-
-### Test Coverage Status
-
-Current test coverage:
-- **405 tests** passing (100% pass rate ✅)
-- **1037 assertions** validating functionality
-- Unit tests for all core components
-- Integration tests for Laravel & Symfony
-- AI provider tests for all supported platforms
 
 ## Code Style
 
-We follow PSR-12 coding standards with some additional rules:
-
-### PHP Standards
-
 - Use strict types: `declare(strict_types=1);`
 - Use type hints for all parameters and return types
-- Use proper PHPDoc comments
-- Follow PSR-4 autoloading standards
-
-### Code Organization
-
-- Keep classes focused and single-purpose
-- Use dependency injection
-- Prefer composition over inheritance
-- Write self-documenting code
-
-### Example
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace Rumenx\PhpSeo\Generators;
-
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Contracts\GeneratorInterface;
-
-/**
- * Generator for creating SEO-optimized content.
- */
-class ExampleGenerator implements GeneratorInterface
-{
-    public function __construct(
-        private readonly SeoConfig $config
-    ) {
-    }
-
-    /**
-     * Generate content from page data.
-     *
-     * @param array<string, mixed> $pageData
-     * @return string
-     */
-    public function generate(array $pageData): string
-    {
-        // Implementation here
-    }
-}
-```
+- Follow PSR-12 standards
+- Use namespace `Intent\Seo`
 
 ## Pull Request Process
 
-### Before Submitting
-
-1. **Update documentation** - Update README, CHANGELOG, or other docs if needed
-2. **Add tests** - Ensure your changes are tested
-3. **Check quality** - Run `composer quality` to verify everything passes
-4. **Update CHANGELOG** - Add your changes to the unreleased section
-
-### Pull Request Template
-
-```markdown
-## Description
-Brief description of the changes.
-
-## Type of Change
-- [ ] Bug fix (non-breaking change that fixes an issue)
-- [ ] New feature (non-breaking change that adds functionality)
-- [ ] Breaking change (fix or feature that causes existing functionality to change)
-- [ ] Documentation update
-
-## Testing
-- [ ] Tests pass locally
-- [ ] Added new tests for this change
-- [ ] Updated existing tests
-
-## Checklist
-- [ ] Code follows project style guidelines
-- [ ] Self-review completed
-- [ ] Documentation updated
-- [ ] CHANGELOG updated
-```
-
-### Review Process
-
-1. **Automated Checks** - All CI checks must pass
-2. **Code Review** - At least one maintainer review required
-3. **Testing** - Changes are tested in various environments
-4. **Documentation** - Documentation is reviewed for accuracy
+1. Update documentation if needed
+2. Add tests for new functionality
+3. Run `composer quality` to verify everything passes
+4. Submit pull request
 
 ## Reporting Issues
 
-### Bug Reports
-
-Use the bug report template and include:
-
-- PHP version
-- Framework version (if applicable)
-- Steps to reproduce
-- Expected vs actual behavior
-- Error messages or logs
-- Minimal code example
-
-### Security Issues
-
-**Do not report security vulnerabilities through public GitHub issues.**
-
-Please email security@rumenx.com instead. See our [Security Policy](SECURITY.md) for details.
+- **Bug Reports**: Use the issue template with steps to reproduce
+- **Security Issues**: Email security concerns privately, do not create public issues
 
 ## Feature Requests
 
-Before submitting a feature request:
-
-1. Check if it already exists in issues
-2. Consider if it fits the project scope
-3. Think about backwards compatibility
-4. Provide a clear use case
-
-Include in your request:
-- Clear description of the feature
-- Use case and motivation
-- Possible implementation approach
-- Examples of usage
-
-## AI Provider Integration
-
-When contributing AI provider integrations:
-
-1. Follow the `ProviderInterface` contract
-2. Include comprehensive error handling
-3. Add rate limiting support
-4. Provide configuration examples
-5. Include tests with mocked responses
-6. Document API requirements and costs
-
-## Documentation Guidelines
-
-- Use clear, concise language
-- Include code examples
-- Keep documentation up to date
-- Use proper Markdown formatting
-- Test all code examples
-
-## Getting Help
-
-- **GitHub Discussions** - For questions and general discussion
-- **GitHub Issues** - For bug reports and feature requests
-- **Documentation** - Check the wiki and README first
-
-## Recognition
-
-Contributors are recognized in:
-- CHANGELOG.md for their contributions
-- GitHub contributors page
-- Special recognition for significant contributions
+Before submitting:
+1. Check if it already exists
+2. Consider if it fits the Intent Framework scope
+3. Provide a clear use case
 
 ---
 
-Thank you for contributing to php-seo! 🚀
+Thank you for contributing to Intent SEO! 🚀

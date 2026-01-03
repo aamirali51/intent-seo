@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Generators;
+namespace Intent\Seo\Generators;
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Contracts\GeneratorInterface;
-use Rumenx\PhpSeo\Schema\ArticleSchema;
-use Rumenx\PhpSeo\Schema\BaseSchema;
-use Rumenx\PhpSeo\Schema\BreadcrumbListSchema;
-use Rumenx\PhpSeo\Schema\OrganizationSchema;
-use Rumenx\PhpSeo\Schema\WebPageSchema;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Contracts\GeneratorInterface;
+use Intent\Seo\Schema\ArticleSchema;
+use Intent\Seo\Schema\BaseSchema;
+use Intent\Seo\Schema\BreadcrumbListSchema;
+use Intent\Seo\Schema\OrganizationSchema;
+use Intent\Seo\Schema\WebPageSchema;
 
 /**
  * Generator for Schema.org structured data.

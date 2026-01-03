@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Config;
+namespace Intent\Seo\Config;
 
 /**
  * Main configuration class for the PHP SEO package.

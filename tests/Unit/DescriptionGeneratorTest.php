@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Generators\DescriptionGenerator;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Generators\DescriptionGenerator;
 
 test('DescriptionGenerator can generate description from content', function () {
     $config = new SeoConfig();

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Providers\XaiProvider;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Providers\XaiProvider;
 
 test('XaiProvider can be instantiated with config', function () {
     $config = new SeoConfig([

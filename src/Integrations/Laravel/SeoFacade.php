@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Integrations\Laravel;
+namespace Intent\Seo\Integrations\Laravel;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * Laravel facade for the SEO manager.
  *
- * @method static \Rumenx\PhpSeo\SeoManager analyze(string $content, array $metadata = [])
+ * @method static \Intent\Seo\SeoManager analyze(string $content, array $metadata = [])
  * @method static string generateTitle(string|null $customTitle = null)
  * @method static string generateDescription(string|null $customDescription = null)
  * @method static array generateMetaTags(array $customMeta = [])
  * @method static array generateAll(array $overrides = [])
  * @method static string renderMetaTags(array|null $seoData = null)
- * @method static \Rumenx\PhpSeo\Config\SeoConfig getConfig()
+ * @method static \Intent\Seo\Config\SeoConfig getConfig()
  * @method static array getPageData()
- * @method static \Rumenx\PhpSeo\SeoManager setPageData(array $data)
- * @method static \Rumenx\PhpSeo\SeoManager withConfig(\Rumenx\PhpSeo\Config\SeoConfig $config)
+ * @method static \Intent\Seo\SeoManager setPageData(array $data)
+ * @method static \Intent\Seo\SeoManager withConfig(\Intent\Seo\Config\SeoConfig $config)
  *
- * @see \Rumenx\PhpSeo\SeoManager
+ * @see \Intent\Seo\SeoManager
  */
 class SeoFacade extends Facade
 {

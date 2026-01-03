@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\AI;
+namespace Intent\Seo\AI;
 
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\Config\SeoConfig;
 
 /**
  * Prompt builder for AI content generation.

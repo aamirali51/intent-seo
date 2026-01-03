@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\AI\PromptBuilder;
-use Rumenx\PhpSeo\Config\SeoConfig;
+use Intent\Seo\AI\PromptBuilder;
+use Intent\Seo\Config\SeoConfig;
 
 test('PromptBuilder can be instantiated with config', function () {
     $config = new SeoConfig();

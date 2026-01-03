@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Generators\ImageAltGenerator;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Generators\ImageAltGenerator;
 
 describe('ImageAltGenerator', function () {
     beforeEach(function () {

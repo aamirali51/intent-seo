@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Integrations\Symfony;
 
 use PHPUnit\Framework\TestCase;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Integrations\Symfony\Twig\SeoExtension;
-use Rumenx\PhpSeo\SeoManager;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Integrations\Symfony\Twig\SeoExtension;
+use Intent\Seo\SeoManager;
 use Twig\TwigFunction;
 
 /**
@@ -404,7 +404,7 @@ class SeoExtensionTest extends TestCase
         $reflection = new \ReflectionClass($this->extension);
         $namespace = $reflection->getNamespaceName();
 
-        $this->assertEquals('Rumenx\PhpSeo\Integrations\Symfony\Twig', $namespace);
+        $this->assertEquals('Intent\Seo\Integrations\Symfony\Twig', $namespace);
     }
 
     public function test_extension_strict_types(): void

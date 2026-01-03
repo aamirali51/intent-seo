@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Rumenx\PhpSeo\Providers;
+namespace Intent\Seo\Providers;
 
-use Rumenx\PhpSeo\Cache\SeoCache;
-use Rumenx\PhpSeo\Config\SeoConfig;
-use Rumenx\PhpSeo\Contracts\ProviderInterface;
-use Rumenx\PhpSeo\Exceptions\ProviderException;
-use Rumenx\PhpSeo\RateLimiting\RateLimiter;
+use Intent\Seo\Cache\SeoCache;
+use Intent\Seo\Config\SeoConfig;
+use Intent\Seo\Contracts\ProviderInterface;
+use Intent\Seo\Exceptions\ProviderException;
+use Intent\Seo\RateLimiting\RateLimiter;
 
 /**
  * Factory for creating AI provider instances.
