@@ -1,5 +1,5 @@
 {
-    "name": "aamirali/intent-seo",
+    "name": "intent/intent-seo",
     "description": "AI-powered SEO optimization package for Intent Framework. Forked from rumenx/php-seo and modified exclusively for Intent Framework integration.",
     "keywords": [
         "seo",
