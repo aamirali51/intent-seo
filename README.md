@@ -2,7 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 [![PHP 8.2+](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://www.php.net/)
-[![Intent Framework](https://img.shields.io/badge/Intent-Framework-purple.svg)](https://github.com/intent/framework)
+[![Intent Framework](https://img.shields.io/badge/Intent-Framework-purple.svg)](https://github.com/aamirali51/Intent-Framework)
+[![Packagist](https://img.shields.io/badge/Packagist-v2.0.0-orange.svg)](https://packagist.org/packages/intent/intent-seo)
 
 > **AI-powered SEO optimization for Intent Framework applications.**
 
@@ -27,223 +28,215 @@
 ## ✨ Features
 
 ### 🤖 AI-Powered Automation
-- **Intelligent Content Analysis**: AI reads and analyzes page content to generate optimal titles, descriptions, and meta tags
-- **Image Analysis**: Automatically generates alt text and titles for images by analyzing context
-- **Social Media Optimization**: Generates platform-specific meta tags (Open Graph, Twitter Cards, etc.)
-- **Multi-Provider Support**: Integration with popular AI models (GPT-4o, Claude 3.5, Gemini 1.5, Grok, Ollama)
+- **Intelligent Content Analysis**: AI generates optimal titles, descriptions, and meta tags
+- **Image Analysis**: Automatically generates alt text for images
+- **Multi-Provider Support**: GPT-4o, Claude 3.5, Gemini 1.5, Grok, Ollama
 
-### 🔧 Manual Configuration Mode
-- **Pattern-Based Generation**: Generate titles and descriptions using configurable patterns
-- **Manual Override**: Full manual control over all SEO elements
-- **Fallback Systems**: Graceful degradation when AI services are unavailable
-- **Template-Based**: Use predefined templates for consistent SEO across pages
+### 🚀 CMS-Grade SEO (v2.0)
+- **XML Sitemap Generator**: With image support and caching
+- **Robots.txt Generator**: Fluent API
+- **Schema.org Builders**: Article, WebPage, Breadcrumb, Organization, Product
+- **Advanced Meta Controls**: Canonical, pagination, robots, Open Graph, Twitter Cards
 
-### 🚀 Modern PHP
-- **Type-safe**: Full PHP 8.2+ type declarations and strict types
-- **Fluent Interface**: Chainable methods for elegant, readable code
-- **Extensible**: Plugin architecture for custom analyzers and generators
-- **High Performance**: Optimized for speed with caching and lazy loading
-
-### 💎 Advanced Features
-- **PSR-16 Caching**: Built-in caching support for improved performance (80%+ faster)
-- **Rate Limiting**: Automatic API throttling with token bucket algorithm
-- **Structured Data**: JSON-LD generation for Schema.org (Article, WebPage, Organization, Breadcrumb)
-- **Cost Optimization**: 80-90% reduction in AI API costs through intelligent caching
+### 💎 Intent Framework Integration
+- **SeoMiddleware**: Auto-initializes SEO
+- **Helper Functions**: `seo()`, `sitemap()`, `robots()`
+- **Single Render**: `{{ seo().render()|raw }}` outputs all SEO tags
 
 ---
 
 ## 📦 Installation
 
 ```bash
-composer require aamirali/intent-seo
+composer require intent/intent-seo
 ```
 
 ### Requirements
-- PHP 8.2 or higher
-- Intent Framework
-- ext-json
-- ext-curl
+- PHP 8.2+
+- Intent Framework 0.6+
 
 ---
 
-## 🚀 Usage with Intent Framework
+## 🚀 Quick Start
 
-### Basic Handler Usage
+### 1. Add Middleware to Route
 
 ```php
-<?php
+use Intent\Seo\SeoMiddleware;
 
-declare(strict_types=1);
-
-namespace App\Handlers;
-
-use Core\App;
-use Intent\Seo\SeoManager;
-use Intent\Seo\Config\SeoConfig;
-
-class PageHandler
-{
-    public function show(string $slug): string
-    {
-        $page = App::db()->query("SELECT * FROM pages WHERE slug = ?", [$slug])->fetch();
-        
-        // Initialize SEO Manager
-        $config = new SeoConfig([
-            'title' => [
-                'pattern' => '{title} | ' . config('app.name'),
-                'max_length' => 60,
-            ],
-            'mode' => 'ai', // or 'manual', 'hybrid'
-            'ai' => [
-                'provider' => 'openai',
-                'api_key' => config('seo.openai_api_key'),
-            ],
-        ]);
-        
-        $seo = new SeoManager($config);
-        $seoData = $seo->analyze($page['content'], [
-            'title' => $page['title'],
-            'url' => url('/pages/' . $slug),
-            'image' => $page['featured_image'] ?? null,
-        ])->generateAll();
-        
-        return view('pages/show', [
-            'page' => $page,
-            'seo' => $seoData,
-        ]);
-    }
-}
+Route::get('/blog/{slug}', $handler)->middleware(SeoMiddleware::class);
 ```
 
-### Twig Template
+### 2. Configure SEO in Handler
+
+```php
+seo()->title('My Page Title')
+     ->description('Page description here')
+     ->canonical('https://example.com/page')
+     ->image('https://example.com/image.jpg')
+     ->addSchema(Schema::article()
+         ->headline('Article Title')
+         ->author('Author Name')
+         ->publishDate('2026-01-04')
+         ->build());
+```
+
+### 3. Render in Twig
 
 ```twig
-{% extends 'layouts/base.twig' %}
-
-{% block head %}
-    <title>{{ seo.title }}</title>
-    <meta name="description" content="{{ seo.description }}">
-    
-    {# Open Graph #}
-    <meta property="og:title" content="{{ seo.og_title }}">
-    <meta property="og:description" content="{{ seo.og_description }}">
-    <meta property="og:image" content="{{ seo.og_image }}">
-    
-    {# Twitter Card #}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ seo.twitter_title }}">
-    <meta name="twitter:description" content="{{ seo.twitter_description }}">
-    
-    {# Structured Data #}
-    {{ seo.structured_data|raw }}
-{% endblock %}
-
-{% block content %}
-    <article>
-        <h1>{{ page.title }}</h1>
-        {{ page.content|raw }}
-    </article>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    {{ seo().render()|raw }}
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
 ```
 
-### SEO Middleware
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace App\Middleware;
-
-use Intent\Seo\SeoManager;
-use Intent\Seo\Config\SeoConfig;
-
-class SeoMiddleware
-{
-    public function handle(callable $next): mixed
-    {
-        // Set up global SEO defaults
-        $config = new SeoConfig([
-            'title' => [
-                'site_name' => config('app.name'),
-                'separator' => ' | ',
-            ],
-            'social' => [
-                'og_site_name' => config('app.name'),
-                'twitter_site' => config('seo.twitter_handle'),
-            ],
-        ]);
-        
-        // Store in registry for use by handlers
-        \Core\Registry::set('seo.config', $config);
-        \Core\Registry::set('seo.manager', new SeoManager($config));
-        
-        return $next();
-    }
-}
+**Output:**
+```html
+<!-- Intent SEO -->
+<title>My Page Title</title>
+<meta name="description" content="Page description here">
+<link rel="canonical" href="https://example.com/page">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="My Page Title">
+<meta property="og:description" content="Page description here">
+<meta property="og:image" content="https://example.com/image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="My Page Title">
+<script type="application/ld+json">{"@context":"https://schema.org"...}</script>
+<!-- /Intent SEO -->
 ```
 
-### Using Registry in Handlers
+---
+
+## 📖 Full API
+
+### SeoManager Methods
 
 ```php
-<?php
+seo()->title('Page Title')              // Set title
+     ->description('Description')       // Set meta description
+     ->canonical('https://...')         // Set canonical URL
+     ->robots(true, true)               // index, follow
+     ->prev('/page?p=1')                // Previous page (pagination)
+     ->next('/page?p=3')                // Next page (pagination)
+     ->openGraph('type', 'article')     // Open Graph meta
+     ->twitter('site', '@handle')       // Twitter Card meta
+     ->image('/image.jpg')              // Social image (OG + Twitter)
+     ->addSchema($schema)               // Add JSON-LD schema
+     ->render();                        // Output all HTML for <head>
+```
 
-use Intent\Seo\SeoManager;
+---
 
-class BlogHandler
-{
-    public function show(string $slug): string
-    {
-        $post = App::db()->query("SELECT * FROM posts WHERE slug = ?", [$slug])->fetch();
-        
-        /** @var SeoManager $seo */
-        $seo = \Core\Registry::get('seo.manager');
-        
-        $seoData = $seo->analyze($post['content'], [
-            'title' => $post['title'],
-            'author' => $post['author_name'],
-            'published_at' => $post['published_at'],
-            'url' => url('/blog/' . $slug),
-        ])->generateAll();
-        
-        return view('blog/show', compact('post', 'seoData'));
+## 📝 XML Sitemap
+
+```php
+use Intent\Seo\Sitemap\SitemapGenerator;
+
+Route::get('/sitemap.xml', function ($req, $res) {
+    $sitemap = new SitemapGenerator();
+    
+    $sitemap->addUrl('https://example.com/', '2026-01-04', 'daily', 1.0);
+    $sitemap->addUrl('https://example.com/about', null, 'monthly', 0.8);
+    
+    // Add from database
+    $pages = DB::table('pages')->where('status', 'published')->get();
+    foreach ($pages as $page) {
+        $sitemap->addUrl(
+            url('/pages/' . $page['slug']),
+            $page['updated_at'],
+            'weekly',
+            0.7,
+            [['loc' => $page['image'], 'title' => $page['title']]]  // Image sitemap
+        );
     }
-}
+    
+    return $res->header('Content-Type', 'application/xml')->send($sitemap->generate());
+});
+```
+
+---
+
+## 🤖 Robots.txt
+
+```php
+use Intent\Seo\Robots;
+
+Route::get('/robots.txt', function ($req, $res) {
+    $robots = Robots::default('https://example.com');
+    // Or customize:
+    // $robots = new Robots();
+    // $robots->allow('/')->disallow('/admin')->sitemap('https://example.com/sitemap.xml');
+    
+    return $res->header('Content-Type', 'text/plain')->send($robots->generate());
+});
+```
+
+---
+
+## 📊 Schema.org Builders
+
+```php
+use Intent\Seo\Schema\Schema;
+
+// Article
+$article = Schema::article()
+    ->headline('Article Title')
+    ->author('Author Name')
+    ->publishDate('2026-01-04')
+    ->image('https://example.com/image.jpg')
+    ->publisher('Site Name', 'https://example.com/logo.png');
+
+seo()->addSchema($article);
+
+// Breadcrumb
+$breadcrumb = Schema::breadcrumb()
+    ->add('Home', '/')
+    ->add('Blog', '/blog')
+    ->add('Article', '/blog/article');
+
+seo()->addSchema($breadcrumb);
+
+// Organization
+$org = Schema::organization()
+    ->name('Company Name')
+    ->url('https://example.com')
+    ->logo('https://example.com/logo.png')
+    ->sameAs(['https://twitter.com/...', 'https://facebook.com/...']);
+
+// Product (E-commerce)
+$product = Schema::product()
+    ->name('Product Name')
+    ->description('Product description')
+    ->price(99.99, 'USD')
+    ->availability('InStock')
+    ->rating(4.5, 120);
 ```
 
 ---
 
 ## ⚙️ Configuration
 
-### Configuration File (config/seo.php)
+### config/seo.php
 
 ```php
-<?php
-
 return [
-    // SEO mode: 'ai', 'manual', or 'hybrid'
-    'mode' => 'hybrid',
+    'mode' => 'manual',  // 'ai', 'manual', 'hybrid'
     
-    // AI Provider settings
+    'title.pattern' => '{title} | {site_name}',
+    'title.site_name' => env('APP_NAME'),
+    'title.max_length' => 60,
+    
+    'description.max_length' => 160,
+    
     'ai.provider' => 'openai',
     'ai.api_key' => env('SEO_AI_API_KEY'),
     'ai.model' => 'gpt-4o-mini',
-    
-    // Title settings
-    'title.pattern' => '{title} | {site_name}',
-    'title.site_name' => env('APP_NAME', 'My Website'),
-    'title.max_length' => 60,
-    
-    // Description settings
-    'description.max_length' => 160,
-    
-    // Social media
-    'social.og_site_name' => env('APP_NAME'),
-    'social.twitter_site' => env('TWITTER_HANDLE'),
-    
-    // Caching
-    'cache.enabled' => true,
-    'cache.ttl' => 3600,
 ];
 ```
 
@@ -251,108 +244,54 @@ return [
 
 ## 🤖 AI Providers
 
-### OpenAI (GPT-4/5)
-
 ```php
+use Intent\Seo\Config\SeoConfig;
+
+// OpenAI
 $config = new SeoConfig([
-    'ai' => [
-        'provider' => 'openai',
-        'api_key' => 'your-openai-api-key',
-        'model' => 'gpt-4o-mini', // Best cost/performance
-    ],
+    'mode' => 'ai',
+    'ai' => ['provider' => 'openai', 'api_key' => '...', 'model' => 'gpt-4o-mini'],
 ]);
-```
 
-### Anthropic (Claude)
-
-```php
+// Anthropic Claude
 $config = new SeoConfig([
-    'ai' => [
-        'provider' => 'anthropic',
-        'api_key' => 'your-anthropic-api-key',
-        'model' => 'claude-3-5-sonnet-20241022',
-    ],
+    'ai' => ['provider' => 'anthropic', 'api_key' => '...', 'model' => 'claude-3-5-sonnet'],
 ]);
-```
 
-### Google (Gemini)
-
-```php
+// Google Gemini
 $config = new SeoConfig([
-    'ai' => [
-        'provider' => 'google',
-        'api_key' => 'your-google-api-key',
-        'model' => 'gemini-1.5-flash',
-    ],
+    'ai' => ['provider' => 'google', 'api_key' => '...', 'model' => 'gemini-1.5-flash'],
 ]);
-```
 
-### Local AI (Ollama)
-
-```php
+// Local Ollama
 $config = new SeoConfig([
-    'ai' => [
-        'provider' => 'ollama',
-        'api_url' => 'http://localhost:11434',
-        'model' => 'llama2',
-    ],
+    'ai' => ['provider' => 'ollama', 'api_url' => 'http://localhost:11434', 'model' => 'llama2'],
 ]);
 ```
 
 ---
 
-## 📝 Structured Data (JSON-LD)
+## 📚 Documentation
 
-Generate Schema.org structured data for rich snippets:
-
-```php
-use Intent\Seo\Schema\ArticleSchema;
-use Intent\Seo\Schema\BreadcrumbListSchema;
-
-// Article schema
-$article = (new ArticleSchema())
-    ->setHeadline('My Article Title')
-    ->setDescription('Article description')
-    ->setAuthor('John Doe')
-    ->setDatePublished('2024-01-15T10:00:00Z')
-    ->setImage('https://example.com/image.jpg');
-
-echo $article->toScript(); // Outputs <script type="application/ld+json">...
-
-// Breadcrumb schema
-$breadcrumb = (new BreadcrumbListSchema())
-    ->addItem('Home', '/', 1)
-    ->addItem('Blog', '/blog', 2)
-    ->addItem('Article', '/blog/article', 3);
-
-echo $breadcrumb->toScript();
-```
+- [ARCHITECTURE.md](ARCHITECTURE.md) - Technical documentation
+- [examples/routes.php](examples/routes.php) - Example routes
+- [examples/views/](examples/views/) - Example Twig templates
 
 ---
 
 ## 🧪 Testing
 
 ```bash
-# Run all tests
-composer test
-
-# Run with coverage
-composer test-coverage
-
-# Run static analysis
-composer analyze
-
-# Check code style
-composer style
+composer test              # Run tests
+composer analyze           # PHPStan analysis
+composer style             # Check code style
 ```
 
 ---
 
 ## 🙏 Credits
 
-This package is a fork of the excellent [php-seo](https://github.com/RumenDamyanov/php-seo) package by **[Rumen Damyanov](https://github.com/RumenDamyanov)**.
-
-The original author has created an amazing, well-tested, and comprehensive SEO solution for PHP. This fork adapts it specifically for Intent Framework while maintaining the core functionality.
+This package is a fork of [php-seo](https://github.com/RumenDamyanov/php-seo) by **[Rumen Damyanov](https://github.com/RumenDamyanov)**.
 
 **Please consider supporting the original author:**
 - ⭐ [Star the original repository](https://github.com/RumenDamyanov/php-seo)
@@ -366,10 +305,3 @@ The original author has created an amazing, well-tested, and comprehensive SEO s
 
 **Original Work:** Copyright (c) Rumen Damyanov  
 **Fork Modifications:** Copyright (c) Aamir Ali
-
----
-
-## 🔗 Related
-
-- **Original Package:** [rumenx/php-seo](https://github.com/RumenDamyanov/php-seo) - For Laravel, Symfony, and standalone PHP
-- **Intent Framework:** [intent/framework](https://github.com/intent/framework) - The micro-framework this package is designed for
